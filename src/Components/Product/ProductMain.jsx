@@ -24,7 +24,7 @@ export default function ProductMain() {
             <TableCell align="left">Name/Title</TableCell>
             <TableCell align="left">Price</TableCell>
             <TableCell align="left">Quantity</TableCell>
-            <TableCell align="left">Expiry Data</TableCell>
+            <TableCell align="left">Expiry Date</TableCell>
             <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>

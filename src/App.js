@@ -1,14 +1,15 @@
 import "./App.css";
-import ProductMain from "./Components/Product/ProductMain";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
+import { Box } from "@mui/material";
+import Product from "./layout/Product";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <ProductMain />
-      </div>
+      <Box>
+        <Product />
+      </Box>
     </Provider>
   );
 }

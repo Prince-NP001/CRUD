@@ -10,7 +10,7 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import "../../Styles/Product/ProductRowStyles.scss";
+import "../../Styles/Product/Product.scss";
 
 export default function ProductRow(props) {
   const [anchorEl, setAnchorEl] = useState(null);
