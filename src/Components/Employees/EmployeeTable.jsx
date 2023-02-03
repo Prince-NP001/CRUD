@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { http } from "../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployee } from "../../Redux/Actions/EmployeeActions";
+import { Container } from "@mui/system";
 
 const EmployeeTable = () => {
   const dispatch = useDispatch();
@@ -27,37 +28,39 @@ const EmployeeTable = () => {
   };
 
   return (
-    <TableContainer component={Paper} className="table__container">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>D.O.B</TableCell>
-            <TableCell>Salary</TableCell>
-            <TableCell>Gender</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {fetchedData.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>{row.dob}</TableCell>
-              <TableCell>{row.salary}</TableCell>
-              <TableCell>{row.gender}</TableCell>
-              <TableCell>{row.gender}</TableCell>
+    <Container>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>D.O.B</TableCell>
+              <TableCell>Salary</TableCell>
+              <TableCell>Gender</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {fetchedData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell>{row.email}</TableCell>
+                <TableCell>{row.dob}</TableCell>
+                <TableCell>{row.salary}</TableCell>
+                <TableCell>{row.gender}</TableCell>
+                <TableCell>{row.gender}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   );
 };
 
