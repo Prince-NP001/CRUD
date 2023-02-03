@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-
+import shortid from "shortid";
 import {
   Box,
   Button,
@@ -11,13 +11,16 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { ProductAdd } from "../../Redux/Actions/ProductActions";
 
 export default function PopupModel(props) {
+  const Dispatch = useDispatch();
   const [userInput, setUserInput] = useState({
-    typedName: "",
-    typedPrice: "",
-    typedQty: "",
-    typedDate: "",
+    name: "",
+    price: "",
+    quantity: "",
+    date: "",
   });
 
   const [open, setOpen] = useState(false);
@@ -31,27 +34,28 @@ export default function PopupModel(props) {
 
   const formSubmitHandle = (e) => {
     e.preventDefault();
-    console.log(userInput);
+    Object.assign(userInput, { id: shortid.generate() });
+    Dispatch(ProductAdd(userInput));
   };
 
   const handleTypedName = (e) => {
     setUserInput((prevState) => {
-      return { ...prevState, typedName: e.target.value };
+      return { ...prevState, name: e.target.value };
     });
   };
   const handleTypedPrice = (e) => {
     setUserInput((prevState) => {
-      return { ...prevState, typedPrice: e.target.value };
+      return { ...prevState, price: e.target.value };
     });
   };
   const handleTypedQty = (e) => {
     setUserInput((prevState) => {
-      return { ...prevState, typedQty: e.target.value };
+      return { ...prevState, quantity: e.target.value };
     });
   };
   const handleTypedDate = (e) => {
     setUserInput((prevState) => {
-      return { ...prevState, typedDate: e.target.value };
+      return { ...prevState, date: e.target.value };
     });
   };
 
@@ -80,7 +84,7 @@ export default function PopupModel(props) {
               margin="dense"
               id="name"
               label="Name/Title"
-              value={userInput.typedName}
+              value={userInput.name}
               onChange={handleTypedName}
               type="text"
               fullWidth
@@ -91,7 +95,7 @@ export default function PopupModel(props) {
               margin="dense"
               id="price"
               label="Price"
-              value={userInput.typedPrice}
+              value={userInput.price}
               onChange={handleTypedPrice}
               type="text"
               fullWidth
@@ -103,7 +107,7 @@ export default function PopupModel(props) {
               margin="dense"
               id="qty"
               label="Quantity"
-              value={userInput.typedQty}
+              value={userInput.quantity}
               onChange={handleTypedQty}
               type="text"
               fullWidth
@@ -114,7 +118,7 @@ export default function PopupModel(props) {
               margin="dense"
               id="expDate"
               label="Expiry Date"
-              value={userInput.typedDate}
+              value={userInput.date}
               onChange={handleTypedDate}
               type="text"
               fullWidth

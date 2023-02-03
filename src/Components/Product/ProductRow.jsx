@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import {
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  TableCell,
-  TableRow,
-} from "@mui/material";
+import { IconButton, Menu, MenuItem, TableCell, TableRow } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import "../../Styles/Product/Product.scss";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ProductDelete } from "../../Redux/Actions/ProductActions";
 
 export default function ProductRow(props) {
+  const Dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (e) => {
@@ -57,10 +54,20 @@ export default function ProductRow(props) {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              Dispatch(ProductDelete(props.productData.id));
+            }}
+          >
             <EditIcon sx={{ mr: 2, color: "grey" }} /> Edit
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              Dispatch(ProductDelete(props.productData.id));
+            }}
+          >
             <DeleteIcon sx={{ mr: 2, color: "grey" }} /> Delete
           </MenuItem>
         </Menu>
