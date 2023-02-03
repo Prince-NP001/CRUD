@@ -1,11 +1,10 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import employeeReducer from "./Reducer/Reducer";
 
-import rootReducer from "./Reducer/EmployeeReducers/RootReducer";
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+const store = configureStore({
+  reducer: {
+    employees: employeeReducer
+  }
+});
 export default store;

@@ -7,21 +7,18 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { Box } from "@mui/system";
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchEmployee,
-  postEmployee,
-} from "../../Redux/Actions/EmployeeActions";
+import { updateEmployee } from "../../Redux/Reducer/Reducer";
+// import { updateEmployee } from "../../Redux/Actions/EmployeeActions";
 import "../../Styles/Employee/modals.scss";
-import { addEmployee } from "../../Redux/Reducer/Reducer";
 
-const AddModal = (props) => {
+const UpdateModal = (props) => {
   const dispatch = useDispatch();
   // const isResponse = useSelector((state) => state.ReducerEmployee.isResponse);
-  const { open, close } = props;
+  const { open, close, targetID } = props;
   const initialInputData = {
     name: "",
     email: "",
@@ -29,11 +26,9 @@ const AddModal = (props) => {
     salary: "",
     gender: "",
   };
-  const fetchedData = useSelector((state) => state.employees.details);
   const [inputData, setInputData] = useState(initialInputData);
   const closeHandler = () => {
     close();
-    dispatch(fetchEmployee());
   };
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -42,18 +37,13 @@ const AddModal = (props) => {
       [name]: value,
     });
   };
-  const postHandler = (e) => {
+  const UpdateHandler = (e) => {
     const finalData = { ...inputData };
-    dispatch(
-      postEmployee(finalData)
-      // addEmployee({
-      //   id: fetchedData[fetchedData.length - 1].id + 1,
-      //   ...finalData,
-      // })
-    );
+    dispatch(updateEmployee({ id: targetID, employee: finalData }));
 
     close();
   };
+  // console.log(targetID);
 
   return (
     <>
@@ -133,9 +123,9 @@ const AddModal = (props) => {
             color="success"
             variant="contained"
             sx={{ margin: "auto", mt: "3vw" }}
-            onClick={postHandler}
+            onClick={UpdateHandler}
           >
-            Add
+            Update
           </Button>
         </Grid>
       </Modal>
@@ -143,4 +133,4 @@ const AddModal = (props) => {
   );
 };
 
-export default AddModal;
+export default UpdateModal;
