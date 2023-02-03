@@ -1,9 +1,11 @@
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
-import { combineReducers, createStore } from "redux";
-import { GetReducerEmployee } from "./Reducer/EmployeeReducers/GetReducer"
+import rootReducer from "./Reducer/EmployeeReducers/RootReducer";
 
-const combinedReducers = combineReducers({
-    GetReducerEmployee
-})
-const store = createStore(combinedReducers)
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 export default store;
