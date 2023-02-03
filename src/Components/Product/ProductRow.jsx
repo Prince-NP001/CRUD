@@ -4,19 +4,34 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import "../../Styles/Product/Product.scss";
-// import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ProductDelete } from "../../Redux/Actions/ProductActions";
+import PopupDialog from "./PopupDialog";
+import axios from "axios";
 
 export default function ProductRow(props) {
   const Dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [editOpen, setEditOpen] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClosePopup = () => {
+    setEditOpen(false);
+  };
+
+  const handleDeleteProduct = (id) => {
+    Dispatch(ProductDelete(id));
+    axios
+      .delete(`http://localhost:8055/items/dummy/${id}`, {})
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -56,16 +71,20 @@ export default function ProductRow(props) {
         >
           <MenuItem
             onClick={() => {
-              handleClose();
-              Dispatch(ProductDelete(props.productData.id));
+              setEditOpen(true);
             }}
           >
             <EditIcon sx={{ mr: 2, color: "grey" }} /> Edit
           </MenuItem>
+          <PopupDialog
+            data={props.productData}
+            open={editOpen}
+            handleClose={handleClosePopup}
+          />
           <MenuItem
             onClick={() => {
               handleClose();
-              Dispatch(ProductDelete(props.productData.id));
+              handleDeleteProduct(props.productData.id);
             }}
           >
             <DeleteIcon sx={{ mr: 2, color: "grey" }} /> Delete

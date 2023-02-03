@@ -25,3 +25,11 @@ export const ProductUpdate = (data) => {
     payload: data,
   };
 };
+
+export const DBUpdateProduct = (data) => {
+  return {
+    type: "DB_PRODUCT",
+    payload: data,
+  };
+};
+

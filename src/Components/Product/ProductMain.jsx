@@ -1,5 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import axios from "axios";
+
+import { DBUpdateProduct } from "../../Redux/Actions/ProductActions";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   Table,
   TableBody,
@@ -11,9 +15,21 @@ import {
 import ProductRow from "./ProductRow";
 
 export default function ProductMain() {
+  const Dispatch = useDispatch();
   const ProductList = useSelector((item) => {
     return item.product.items;
   });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8055/items/dummy", {})
+      .then(function (response) {
+        Dispatch(DBUpdateProduct(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <TableContainer>
@@ -28,11 +44,15 @@ export default function ProductMain() {
             <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {ProductList.map((data) => {
-            return <ProductRow key={data.id} productData={data} />;
-          })}
-        </TableBody>
+        {ProductList.data ? (
+          <TableBody>
+            {ProductList.data.map((data) => {
+              return <ProductRow key={data.id} productData={data} />;
+            })}
+          </TableBody>
+        ) : (
+          ""
+        )}
       </Table>
     </TableContainer>
   );
