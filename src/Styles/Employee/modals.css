@@ -1,5 +1,5 @@
 .modal-add {
-  max-width: 40vw !important ;
+  max-width: 40vw !important;
   min-width: 40vw;
   height: fit-content;
   margin: auto;
@@ -8,14 +8,17 @@
   padding: 4vh 0;
   border-radius: 3vw;
   align-items: center;
-  .modal-add__label {
-    text-align: center;
-    font-size: x-large;
-  }
-  .modal-add__input {
-    margin: 1vh 1vw;
-  }
 }
+
+.modal-add .modal-add__label {
+  text-align: center;
+  font-size: x-large;
+}
+
+.modal-add .modal-add__input {
+  margin: 1vh 1vw;
+}
+
 .modal-add__button-container {
   width: 50%;
   margin: auto;
@@ -32,12 +35,14 @@
   height: 16vh;
   border-radius: 2vw;
   background-color: white;
-  &__header {
-    text-align: center;
-  }
-  &__button-container {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 3vw;
-  }
+}
+
+.modal-delete__header {
+  text-align: center;
+}
+
+.modal-delete__button-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 3vw;
 }

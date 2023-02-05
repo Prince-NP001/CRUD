@@ -17,59 +17,53 @@ import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 const EmployeeTable = () => {
   const dispatch = useDispatch();
-  const fetchedData = useSelector((state) => state.employees.details);
-  // const fetchedData = useSelector((state) => state.Reducer.details);
+  // const fetchedData = useSelector((state) => state.employees.details);
+  const fetchedData = useSelector((state) => state.reducer.employees);
+
   const [modalToOpen, setModalToOpen] = useState(null);
   const [currentID, setCurrentId] = useState(null);
 
-  const handleClose = () => {
-    dispatch(fetchEmployee());
-  };
   const modalCloseHandler = () => {
     setModalToOpen(null);
   };
   useEffect(() => {
     dispatch(fetchEmployee());
-  }, []);
-
-  useEffect(() => {
-    if (!fetchedData) dispatch(fetchEmployee());
-  }, [fetchedData]);
+  }, [dispatch]);
 
   const EditModalHandler = (id) => {
-    handleClose();
-    setModalToOpen("EDIT");
     setCurrentId(id);
+    setModalToOpen("EDIT");
   };
   const deleteModalHandler = (id) => {
-    handleClose();
-    setModalToOpen("DELETE");
     setCurrentId(id);
+    setModalToOpen("DELETE");
   };
+  console.log(fetchedData);
 
   return (
-    <Box sx={{ width: "90vw", margin: "auto" }}>
+    <Box sx={{ width: "90vw", margin: "auto",pt:"2vh" }}>
       <Button
         color="primary"
         variant="contained"
         onClick={() => setModalToOpen("ADD")}
+       size='large'
       >
         ADD
       </Button>
       <TableContainer component={Paper} className="table__container">
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
+          <TableHead className="table__container-head">
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>D.O.B</TableCell>
-              <TableCell>Salary</TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell className="table__container-head-text">Name</TableCell>
+              <TableCell className="table__container-head-text">Email</TableCell>
+              <TableCell className="table__container-head-text">D.O.B</TableCell>
+              <TableCell className="table__container-head-text">Salary</TableCell>
+              <TableCell className="table__container-head-text">Gender</TableCell>
+              <TableCell className="table__container-head-text" align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {fetchedData != undefined
+            {fetchedData.length !== 0
               ? fetchedData.map((row) => (
                   <TableRow
                     key={row.id}
@@ -82,7 +76,7 @@ const EmployeeTable = () => {
                     <TableCell>{row.dob}</TableCell>
                     <TableCell>{row.salary}</TableCell>
                     <TableCell>{row.gender}</TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Button
                         variant="contained"
                         color="success"
@@ -105,14 +99,17 @@ const EmployeeTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <AddModal open={modalToOpen == "ADD"} close={() => modalCloseHandler()} />
+      <AddModal
+        open={modalToOpen === "ADD"}
+        close={() => modalCloseHandler()}
+      />
       <DeleteModal
-        open={modalToOpen == "DELETE"}
+        open={modalToOpen === "DELETE"}
         close={() => modalCloseHandler()}
         targetID={currentID}
       />
       <UpdateModal
-        open={modalToOpen == "EDIT"}
+        open={modalToOpen === "EDIT"}
         close={() => modalCloseHandler()}
         targetID={currentID}
       />

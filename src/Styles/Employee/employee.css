@@ -4,11 +4,13 @@
   border-radius: 10vw;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   width: fit-content;
-  &-head {
-    background-color: #3c84ab;
-    &-text {
-      color: white !important;
-      font-size: 1.3rem !important;
-    }
-  }
+}
+
+.table__container-head {
+  background-color: #3c84ab;
+}
+
+.table__container-head-text {
+  color: white !important;
+  font-size: 1.3rem !important;
 }

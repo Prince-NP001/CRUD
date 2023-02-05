@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Grid,
   InputLabel,
@@ -7,16 +8,15 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+
+import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  fetchEmployee,
   postEmployee,
 } from "../../Redux/Actions/EmployeeActions";
 import "../../Styles/Employee/modals.scss";
-import { addEmployee } from "../../Redux/Reducer/Reducer";
+
 
 const AddModal = (props) => {
   const dispatch = useDispatch();
@@ -29,11 +29,11 @@ const AddModal = (props) => {
     salary: "",
     gender: "",
   };
-  const fetchedData = useSelector((state) => state.employees.details);
+  
   const [inputData, setInputData] = useState(initialInputData);
   const closeHandler = () => {
     close();
-    dispatch(fetchEmployee());
+
   };
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -43,6 +43,10 @@ const AddModal = (props) => {
     });
   };
   const postHandler = (e) => {
+    e.preventDefault();
+    if(!inputData.name||!inputData.email||!inputData.dob||!inputData.salary||!inputData.gender){
+      return alert("Empty Fields")
+    }
     const finalData = { ...inputData };
     dispatch(
       postEmployee(finalData)
@@ -128,15 +132,27 @@ const AddModal = (props) => {
             </Select>
           </Grid>
 
+         
+          <Box className="modal-add__button-container">
           <Button
-            size="large"
+           size="large"
             color="success"
             variant="contained"
-            sx={{ margin: "auto", mt: "3vw" }}
+               className="modal-add__button"
             onClick={postHandler}
           >
             Add
           </Button>
+          <Button
+            variant="contained"
+            color="error"
+            size="large"
+            className="modal-add__button"
+            onClick={closeHandler}
+          >
+            Cancel
+          </Button>
+        </Box>
         </Grid>
       </Modal>
     </>

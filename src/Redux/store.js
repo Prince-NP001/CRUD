@@ -1,10 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import employeeReducer from "./Reducer/Reducer";
+import { applyMiddleware, createStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
+import rootReducer from "./Reducer/RootReducer";
 
-
-const store = configureStore({
-  reducer: {
-    employees: employeeReducer
-  }
-});
+const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
