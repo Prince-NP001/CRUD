@@ -31,9 +31,8 @@ const UpdateModal = (props) => {
     gender: "",
   };
   useEffect(() => {
-    if(open)
-    dispatch(getSingleEmployee(targetID));
-  }, [open,dispatch,targetID]);
+    if (open) dispatch(getSingleEmployee(targetID));
+  }, [open, dispatch, targetID]);
 
   const [inputData, setInputData] = useState(initialInputData);
   useEffect(() => {
@@ -54,12 +53,12 @@ const UpdateModal = (props) => {
   };
 
   const UpdateHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const finalData = { ...inputData };
-    dispatch(updateEmployee({data:finalData,id:targetID}))
+    dispatch(updateEmployee({ data: finalData, id: targetID }));
     close();
   };
-  console.log(employee);
+  // console.log(employee);
 
   return (
     <>
@@ -73,7 +72,7 @@ const UpdateModal = (props) => {
               <TextField
                 className="modal-add__input"
                 variant="outlined"
-                value={inputData.name}
+                value={inputData.name || ""}
                 onChange={changeHandler}
                 name="name"
               />
@@ -85,7 +84,7 @@ const UpdateModal = (props) => {
               <TextField
                 className="modal-add__input"
                 variant="outlined"
-                value={inputData.email}
+                value={inputData.email || ""}
                 onChange={changeHandler}
                 name="email"
                 type={"email"}
@@ -98,7 +97,7 @@ const UpdateModal = (props) => {
               <TextField
                 className="modal-add__input"
                 variant="outlined"
-                value={inputData.dob}
+                value={inputData.dob || ""}
                 onChange={changeHandler}
                 name="dob"
                 type={"date"}
@@ -111,7 +110,7 @@ const UpdateModal = (props) => {
               <TextField
                 className="modal-add__input"
                 variant="outlined"
-                value={inputData.salary}
+                value={inputData.salary || ""}
                 onChange={changeHandler}
                 name="salary"
                 type={"number"}
@@ -124,40 +123,36 @@ const UpdateModal = (props) => {
               <Select
                 className="modal-add__input"
                 variant="outlined"
-                value={inputData.gender}
+                value={inputData.gender || ""}
                 onChange={changeHandler}
                 name="gender"
                 autoWidth
-                defaultValue=""
                 sx={{ minWidth: "8vw" }}
               >
-                <MenuItem value={"Male"}>Male</MenuItem>
-                <MenuItem value={"Female"}>Female</MenuItem>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
               </Select>
             </Grid>
 
-          
-                  <Box className="modal-add__button-container">
-          <Button
-             size="large"
-              color="success"
-              variant="contained"
-          
-              onClick={UpdateHandler}
-            >
-              Update
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            size="large"
-            className="modal-add__button"
-            
-            onClick={closeHandler}
-          >
-            Cancel
-          </Button>
-        </Box>
+            <Box className="modal-add__button-container">
+              <Button
+                size="large"
+                color="success"
+                variant="contained"
+                onClick={UpdateHandler}
+              >
+                Update
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                size="large"
+                className="modal-add__button"
+                onClick={closeHandler}
+              >
+                Cancel
+              </Button>
+            </Box>
           </Grid>
         </Modal>
       }

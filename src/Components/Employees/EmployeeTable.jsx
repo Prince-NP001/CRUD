@@ -38,28 +38,38 @@ const EmployeeTable = () => {
     setCurrentId(id);
     setModalToOpen("DELETE");
   };
-  console.log(fetchedData);
+  // console.log(fetchedData);
 
   return (
-    <Box sx={{ width: "90vw", margin: "auto",pt:"2vh" }}>
+    <Box sx={{ width: "90vw", margin: "auto", pt: "2vh" }}>
       <Button
         color="primary"
         variant="contained"
         onClick={() => setModalToOpen("ADD")}
-       size='large'
+        size="large"
       >
         ADD
       </Button>
       <TableContainer component={Paper} className="table__container">
-        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead className="table__container-head">
             <TableRow>
               <TableCell className="table__container-head-text">Name</TableCell>
-              <TableCell className="table__container-head-text">Email</TableCell>
-              <TableCell className="table__container-head-text">D.O.B</TableCell>
-              <TableCell className="table__container-head-text">Salary</TableCell>
-              <TableCell className="table__container-head-text">Gender</TableCell>
-              <TableCell className="table__container-head-text" align="center">Actions</TableCell>
+              <TableCell className="table__container-head-text">
+                Email
+              </TableCell>
+              <TableCell className="table__container-head-text">
+                D.O.B
+              </TableCell>
+              <TableCell className="table__container-head-text">
+                Salary
+              </TableCell>
+              <TableCell className="table__container-head-text">
+                Gender
+              </TableCell>
+              <TableCell className="table__container-head-text" align="center">
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

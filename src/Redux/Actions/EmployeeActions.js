@@ -10,7 +10,7 @@ import {
 export const fetchEmployee = () => {
   return async (dispatch) => {
     return await http.get("/employee").then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       dispatch({
         type: GET_EMPLOYEE,
         payload: res.data.data,
@@ -22,7 +22,7 @@ export const fetchEmployee = () => {
 export const postEmployee = (data) => {
   return async (dispatch) => {
     await http.post(`/employee/`, data).then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({
         type: POST_EMPLOYEE,
         payload: res.data.data,
@@ -59,7 +59,7 @@ export const getSingleEmployee = (id) => {
 export const updateEmployee = (data) => {
   return async (dispatch) => {
     return await http.patch(`/employee/${data.id}`, data.data).then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({
         type: UPDATE_EMPLOYEE,
         payload: { id: data.id, employee: data.data },
