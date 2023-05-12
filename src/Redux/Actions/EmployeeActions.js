@@ -21,7 +21,7 @@ export const fetchEmployee = () => {
 
 export const postEmployee = (data) => {
   return async (dispatch) => {
-    await http.post(`/employee/`, data).then((res) => {
+    await http.post(`/employee`, data).then((res) => {
       // console.log(res);
       dispatch({
         type: POST_EMPLOYEE,
@@ -37,8 +37,8 @@ export const postEmployee = (data) => {
 
 export const deleteEmployee = (id) => {
   return async (dispatch) => {
-    return await http.delete(`/employee/${id}`).then(async (res) => {
-      await dispatch({
+    return await http.delete(`/employee/${id}`).then((res) => {
+      dispatch({
         type: DELETE_EMPLOYEE,
         payload: id,
       });

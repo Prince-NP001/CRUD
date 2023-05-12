@@ -12,11 +12,8 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  postEmployee,
-} from "../../Redux/Actions/EmployeeActions";
+import { postEmployee } from "../../Redux/Actions/EmployeeActions";
 import "../../Styles/Employee/modals.scss";
-
 
 const AddModal = (props) => {
   const dispatch = useDispatch();
@@ -29,11 +26,10 @@ const AddModal = (props) => {
     salary: "",
     gender: "",
   };
-  
+
   const [inputData, setInputData] = useState(initialInputData);
   const closeHandler = () => {
     close();
-
   };
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -43,9 +39,14 @@ const AddModal = (props) => {
     });
   };
   const postHandler = (e) => {
-    e.preventDefault();
-    if(!inputData.name||!inputData.email||!inputData.dob||!inputData.salary||!inputData.gender){
-      return alert("Empty Fields")
+    if (
+      !inputData.name ||
+      !inputData.email ||
+      !inputData.dob ||
+      !inputData.salary ||
+      !inputData.gender
+    ) {
+      return alert("Empty Fields");
     }
     const finalData = { ...inputData };
     dispatch(
@@ -132,27 +133,26 @@ const AddModal = (props) => {
             </Select>
           </Grid>
 
-         
           <Box className="modal-add__button-container">
-          <Button
-           size="large"
-            color="success"
-            variant="contained"
-               className="modal-add__button"
-            onClick={postHandler}
-          >
-            Add
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            size="large"
-            className="modal-add__button"
-            onClick={closeHandler}
-          >
-            Cancel
-          </Button>
-        </Box>
+            <Button
+              size="large"
+              color="success"
+              variant="contained"
+              className="modal-add__button"
+              onClick={postHandler}
+            >
+              Add
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              size="large"
+              className="modal-add__button"
+              onClick={closeHandler}
+            >
+              Cancel
+            </Button>
+          </Box>
         </Grid>
       </Modal>
     </>

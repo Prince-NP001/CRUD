@@ -2,13 +2,12 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
 import "../../Styles/Employee/modals.scss";
-import  {deleteEmployee}  from "../../Redux/Actions/EmployeeActions";
+import { deleteEmployee } from "../../Redux/Actions/EmployeeActions";
 const DeleteModal = (props) => {
   const dispatch = useDispatch();
   const { open, close, targetID } = props;
   const deleteHandler = () => {
-    dispatch(deleteEmployee( targetID ));
-   
+    dispatch(deleteEmployee(targetID));
     closeHandler();
   };
   const closeHandler = () => {

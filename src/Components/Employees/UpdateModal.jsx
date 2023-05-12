@@ -53,7 +53,6 @@ const UpdateModal = (props) => {
   };
 
   const UpdateHandler = (e) => {
-    e.preventDefault();
     const finalData = { ...inputData };
     dispatch(updateEmployee({ data: finalData, id: targetID }));
     close();
